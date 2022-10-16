@@ -1,0 +1,52 @@
+.container {
+    /* margin-top: 10%; */
+    margin-top:3vw;
+    max-width: 100vw;
+}
+
+#profile_nav {
+    padding-left: 5%;
+}
+
+#websitelist_nav {
+    padding-left: 2%;
+}
+
+#websitelist_nav_img {
+    margin-right:15px;
+}
+
+.list-group-item{
+    color:#0d6efd;
+    border: 0px;
+}
+
+#deletebt_widgetedit{
+    padding-bottom: 5vw;
+}
+
+
+#website_edit_textarea_description{
+    width: 100%;
+}
+
+
+@media (orientation:portrait) {
+    .hide-on-portrait {
+        display: none;
+    }
+}
+
+@media (orientation: landscape){
+    .hide-on-portrait {
+        width: 30%;
+        padding-right: 0px;
+    }
+}
+
+@media (orientation: landscape){
+    .rightColumn {
+        width: 70%;
+        padding-left: 0px;
+    }
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- ensure proper rendering for all devices(mobile device first) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <!-- bootstrap css file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- my own css file -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="hide-on-portrait">
+            <!-- <div class="col-xs-12 col-sm-6"> -->
+            <nav class="navbar navbar-dark bg-primary" id="websitelist_nav">
+                <a class="navbar-brand" href="#">
+                    <img src="../imgs/angle-left.svg" width="30" height="24" id="websitelist_nav_img">Websites
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="../imgs/check.svg" width="30" height="24">
+                </a>
+            </nav>
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Address Book App
+                    <img src="../imgs/settings.svg" width="18" height="18">
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Blogger
+                    <img src="../imgs/settings.svg" width="18" height="18">
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Blogging App
+                    <img src="../imgs/settings.svg" width="18" height="18">
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Script Testing App
+                    <img src="../imgs/settings.svg" width="18" height="18">
+                </li>
+            </ul>
+        </div>
+
+        <!-- right column -->
+        <!-- <div class="col-xs-12 col-sm-6"> -->
+        <div class="rightColumn">
+            <!-- Image and text -->
+            <nav class="navbar navbar-dark bg-primary" id="websitelist_nav">
+                <a class="navbar-brand" href="#">
+                    <img src="../imgs/angle-left.svg" width="30" height="24" id="websitelist_nav_img">New Website
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="../imgs/plus.svg" width="30" height="24">
+                </a>
+            </nav>
+
+            <div class="container">
+                <div class="col-10 offset-1">
+                    <div class="mb-3">
+                        <form>
+                            <div class="form-outline mb-2">
+                                <h6><span class="label label-default">Website Name</span></h6>
+                                <input type="text" id="username_login" class="form-control"
+                                    placeholder="website name" />
+                            </div>
+
+                            <div class="form-outline mb-2">
+                                <h6><span class="label label-default">Website Description</span></h6>
+                                <textarea id="website_edit_textarea_description" col = "10"rows="5" placeholder="Wikipedia is a multilingual free online encyclopedia written and maintained by a community of volunteers through open collaboration and a wiki-based editing system. Its editors are known as Wikipedians. Wikipedia is the largest and most-read reference work in history.[3] It is consistently one of the 10 most popular websites ranked by the Similarweb and formerly Alexa; as of 2022, Wikipedia was ranked the 7th most popular site.[3][4][5] It is hosted by the Wikimedia Foundation, an American non-profit organization funded mainly through donations."></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-danger" type="button">Delete</button>
+                            </div>
+                            
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    </div>
+    </div>
