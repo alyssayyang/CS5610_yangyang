@@ -1,0 +1,218 @@
+<!-- YANG YANG -->
+cs5610 HW4 Oct17 2022
+Changes I have made to this file:
+1. changed the speed of ball by adjust value of dx and dy to 2.5 and -2.5
+2. changed the size, background and background style of canvas
+3. changed brick image to banana, increased numbers
+4. changed the ball to a monkey
+5. changed the paddle to a leaftray
+6. changed font style
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop - lesson 10: finishing up</title>
+    <style>* { padding: 0; margin: 0; } canvas 
+    { display: block; 
+    margin: 0 auto; 
+    background-image:url('./img/jungle.jpg'); background-size:cover;}</style>
+</head>
+<body>
+    <canvas id="myCanvas" width="580" height="320"></canvas>
+</canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    const ballRadius = 10;
+    const x = canvas.width/2;
+    const y = canvas.height-30;
+
+    var flex_x = canvas.width/2;
+    var flex_y = canvas.height-30;
+
+    var dx = 2.5;
+    var dy = -2.5;
+    // var bananaleafHeight = 10;
+    // var bananaleafWidth = 75;
+
+    var bananaleafHeight = 20;
+    var bananaleafWidth = 200;
+    var bananaleafX = (canvas.width-bananaleafWidth)/2;
+    var rightPressed = false;
+    var leftPressed = false;
+    const bananaRowCount = 6;
+    const bananaColumnCount = 3;
+    const bananaWidth = 75;
+    const bananaHeight = 20;
+    const monkeyWidth = 75;
+    const monkeyHeight = 75;
+    var bananaPadding = 10;
+    var bananaOffsetTop = 30;
+    var bananaOffsetLeft = 30;
+    var score = 0;
+    var lives = 3;
+
+    var banana = new Image();
+    banana.src = './img/banana-png-13.png';
+
+    var bananaleaf = new Image();
+    bananaleaf.src = './img/BAUGHAUS_banana-leaf.png';
+
+    var monkey = new Image();
+    monkey.src= './img/440-monkey.png';
+
+    var bananas = [];
+    for(var c=0; c<bananaColumnCount; c++) {
+        bananas[c] = [];
+        for(var r=0; r<bananaRowCount; r++) {
+            bananas[c][r] = { x: 0, y: 0, status: 1 };
+        }
+    }
+
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("mousemove", mouseMoveHandler, false);
+
+    function keyDownHandler(e) {
+        if(e.code  == "ArrowRight") {
+            rightPressed = true;
+        }
+        else if(e.code == 'ArrowLeft') {
+            leftPressed = true;
+        }
+    }
+    function keyUpHandler(e) {
+        if(e.code == 'ArrowRight') {
+            rightPressed = false;
+        }
+        else if(e.code == 'ArrowLeft') {
+            leftPressed = false;
+        }
+    }
+    function mouseMoveHandler(e) {
+        var relativeX = e.clientX - canvas.offsetLeft;
+        if(relativeX > 0 && relativeX < canvas.width) {
+            bananaleafX = relativeX - bananaleafWidth/2;
+        }
+    }
+    function collisionDetection() {
+        for(var c=0; c<bananaColumnCount; c++) {
+            for(var r=0; r<bananaRowCount; r++) {
+                var b = bananas[c][r];
+                if(b.status == 1) {
+                    if(flex_x > b.x && flex_x < b.x+bananaWidth && flex_y > b.y && flex_y < b.y+bananaHeight) {
+                        dy = -dy;
+                        b.status = 0;
+                        score++;
+                        if(score == bananaRowCount*bananaColumnCount) {
+                            alert("YOU WIN, CONGRATS!");
+                            document.location.reload();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function drawBall() {
+
+        ctx.drawImage(monkey,flex_x,flex_y,monkeyWidth,monkeyHeight);
+    }
+
+    function drawbananaleaf() {
+
+        ctx.drawImage(bananaleaf,bananaleafX,canvas.height-bananaleafHeight,bananaleafWidth,bananaleafHeight);
+    }
+
+    function drawBananas() {
+            for(var c=0; c<bananaColumnCount; c++) {
+                for(var r=0; r<bananaRowCount; r++) {
+                    if(bananas[c][r].status == 1) {
+                        var bananaX = (r*(bananaWidth+bananaPadding))+bananaOffsetLeft;
+                        var bananaY = (c*(bananaHeight+bananaPadding))+bananaOffsetTop;
+                        bananas[c][r].x = bananaX;
+                        bananas[c][r].y = bananaY;
+                        ctx.drawImage(banana,bananaX,bananaY,bananaWidth,bananaWidth);
+                    }
+                }   
+            }
+
+    }
+
+    function drawScore() {
+        // ctx.font = "16px Arial";
+        // ctx.fillStyle = "#0095DD"
+
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#FFEF00";
+        ctx.fillText("Score: "+score, 8, 20);
+    }
+
+    function drawLives() {
+        // ctx.font = "16px Arial";
+        // ctx.fillStyle = "#0095DD";
+        // ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#FFEF00";
+
+        ctx.fillText("Lives: "+lives, canvas.width-100, 20);
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBananas();
+        drawBall();
+        drawbananaleaf();
+        drawScore();
+        drawLives();
+        collisionDetection();
+
+        if(flex_x + dx > canvas.width-monkeyWidth/2 || flex_x + dx < monkeyWidth/2) {
+            dx = -dx;
+        }
+        if(flex_y + dy < monkeyWidth/2) {
+            dy = -dy;
+        }
+        else if(flex_y + dy > canvas.height) {
+            if(flex_x > bananaleafX && flex_x < bananaleafX + bananaleafWidth) {
+                dy = -dy;
+            }
+            else {
+                lives--;
+                if(!lives) {
+                    alert("GAME OVER");
+                    document.location.reload();
+                }
+                else {
+                    flex_x = canvas.width/2;
+                    flex_y = canvas.height-30;
+                    dx = 2;
+                    dy = -2;
+                    bananaleafX = (canvas.width-bananaleafWidth)/2;
+                }
+            }
+        }
+
+        if(rightPressed && bananaleafX < canvas.width-bananaleafWidth) {
+            bananaleafX += 7;
+        }
+        else if(leftPressed && bananaleafX > 0) {
+            bananaleafX -= 7;
+        }
+
+        flex_x += dx;
+        flex_y += dy;
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    
+</script>
+
+</body>
+</html>
