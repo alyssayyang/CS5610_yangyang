@@ -90,12 +90,8 @@ const getCrimeList = async () => {
     // console.log(Object.getOwnPropertyNames(crimelist));
     // console.log(crimelist.results);
     // console.log(Object.getOwnPropertyNames(crimelist.results[2]));
-    console.log(crimelist);
+    // console.log(crimelist);
 
-    const crimeArray = crimelist.results;
-    console.log(crimeArray);
-    console.log(crimeArray[0]);
-    console.log(crimeArray[0].data_year);
 
     //populates data to table
     crimelist.results.map((e) => {
